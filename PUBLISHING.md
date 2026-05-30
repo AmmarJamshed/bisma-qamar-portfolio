@@ -25,29 +25,20 @@ This folder is also a **GitBook-compatible** documentation site (Markdown + `SUM
 
 ## Option A — GitBook.com (recommended)
 
-1. **Create a GitHub repository**
-   - Push this entire `bisma-qamar-portfolio` folder to GitHub (public or private).
+**Repository (live):** [github.com/AmmarJamshed/bisma-qamar-portfolio](https://github.com/AmmarJamshed/bisma-qamar-portfolio)
 
-2. **Sign in to GitBook**
-   - Go to [https://www.gitbook.com](https://www.gitbook.com) and sign in with GitHub.
+**One-click import (sign in with GitHub first):**  
+[app.gitbook.com/import/github?owner=AmmarJamshed&repo=bisma-qamar-portfolio](https://app.gitbook.com/import/github?owner=AmmarJamshed&repo=bisma-qamar-portfolio)
 
-3. **Import the repo**
-   - **New space** → **Import from GitHub** → select your repository.
-   - GitBook will detect `SUMMARY.md` and `.gitbook.yaml`.
+1. Open the import link above → **Continue with GitHub** (account: AmmarJamshed).
+2. Confirm the repo **bisma-qamar-portfolio** — GitBook reads `SUMMARY.md` and `.gitbook.yaml`.
+3. Space settings → title **Bisma Qamar**, visibility **Public**.
+4. Optional: add cover image and space logo in GitBook’s editor.
 
-4. **Customize**
-   - Space settings → title: **Bisma Qamar**
-   - Add a cover image and logo (optional) in GitBook’s visual editor.
-   - Set visibility to **Public**.
+**Sync:** Push to `main` on GitHub → GitBook syncs automatically (Git Sync).
 
-5. **Update contact page**
-   - Edit `contact.md` with real email/phone before sharing.
-
-6. **Share**
-   - GitBook gives you a URL like `https://bisma-qamar.gitbook.io/...`
-   - Enable a custom domain later if needed.
-
-**Sync:** Future edits: push to GitHub → GitBook syncs automatically (Git Sync).
+**Static preview (GitHub Pages, already deployed):**  
+[ammarjamshed.github.io/bisma-qamar-portfolio](https://ammarjamshed.github.io/bisma-qamar-portfolio/) — Honkit build of the same Markdown; use while setting up GitBook.com or as a backup URL.
 
 ---
 
