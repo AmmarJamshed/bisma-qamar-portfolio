@@ -58,13 +58,10 @@ Steps: Sign in → edit fields in the sidebar sections → **Save changes** → 
 
 ## What she can edit
 
-- Home headline, intro, badges, LinkedIn
-- Profile photo (upload in admin)
-- Stats numbers and labels
-- About text and highlights
-- Empowerment quote
-- Three role cards
-- Publications and timeline
+- Home headline, intro, badges, LinkedIn, profile photo (upload)
+- **Add/remove** stats, highlights, roles, publications, and timeline entries
+- **Videos & photos** — paste YouTube/Vimeo links or upload gallery images
+- **Custom sections** — create new site sections (e.g. Awards, Speaking) with text, links, photos, and videos
 - Contact email and links
 
 Layout and colors stay fixed so the design cannot break.

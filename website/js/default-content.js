@@ -141,4 +141,11 @@ window.PORTFOLIO_DEFAULT_CONTENT = {
       body: "Co-founded Awaz e Bezuban (Aug 2019). Daraz brands & campaigns. Hunar Foundation project. Merit scholarship Sep 2021.",
     },
   ],
+  media: {
+    title: "Videos & photos",
+    subtitle: "Talks, interviews, and moments from the field.",
+    videos: [],
+    gallery: [],
+  },
+  customSections: [],
 };

@@ -898,6 +898,113 @@ body {
   margin: 0;
 }
 
+/* Media section */
+.media-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.media-video-card {
+  background: var(--un-white);
+  border: 1px solid var(--un-grey-200);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+.media-video-card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  color: var(--un-navy-deep);
+}
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--un-navy-deep);
+}
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-link {
+  color: var(--un-blue-dark);
+  font-weight: 700;
+}
+.media-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.gallery-card {
+  margin: 0;
+  background: var(--un-white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--un-grey-200);
+  box-shadow: var(--shadow-sm);
+}
+.gallery-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.gallery-card figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--un-grey-700);
+}
+
+/* Custom sections */
+.section-custom .custom-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.custom-item {
+  background: var(--un-white);
+  border: 1px solid var(--un-grey-200);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.custom-item--link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.custom-item--link:hover {
+  border-color: var(--un-blue);
+  transform: translateY(-2px);
+}
+.custom-item--image {
+  padding: 0;
+  overflow: hidden;
+}
+.custom-item--image img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+}
+.custom-item--image figcaption {
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+}
+.custom-link-arrow {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--un-blue-dark);
+  font-weight: 700;
+}
+
 /* Footer — UN navy */
 .site-footer {
   background: var(--un-navy-deep);

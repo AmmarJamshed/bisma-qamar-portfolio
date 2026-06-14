@@ -1,6 +1,5 @@
 /**
  * Loads portfolio content from Supabase and applies it to the page.
- * Falls back to HTML defaults if Supabase is not configured.
  */
 (function () {
   const cfg = window.PORTFOLIO_CONFIG || {};
@@ -10,19 +9,166 @@
     return document.querySelector(sel);
   }
 
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
   function setText(selector, value) {
     const node = el(selector);
     if (node && value != null) node.textContent = value;
   }
 
-  function setHtml(selector, value) {
-    const node = el(selector);
-    if (node && value != null) node.innerHTML = value;
-  }
-
   function setAttr(selector, attr, value) {
     const node = el(selector);
     if (node && value != null) node.setAttribute(attr, value);
+  }
+
+  function mergeContent(remote) {
+    const base = structuredClone(defaults);
+    if (!remote) return base;
+    return {
+      ...base,
+      ...remote,
+      hero: { ...base.hero, ...remote.hero },
+      about: { ...base.about, ...remote.about, highlights: remote.about?.highlights ?? base.about.highlights },
+      empowerment: { ...base.empowerment, ...remote.empowerment },
+      contact: { ...base.contact, ...remote.contact },
+      media: {
+        ...base.media,
+        ...remote.media,
+        videos: remote.media?.videos ?? base.media?.videos ?? [],
+        gallery: remote.media?.gallery ?? base.media?.gallery ?? [],
+      },
+      stats: remote.stats ?? base.stats,
+      roles: remote.roles ?? base.roles,
+      publications: remote.publications ?? base.publications,
+      timeline: remote.timeline ?? base.timeline,
+      customSections: remote.customSections ?? base.customSections ?? [],
+    };
+  }
+
+  function videoEmbedUrl(url) {
+    if (!url) return null;
+    const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/);
+    if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
+    const vm = url.match(/vimeo\.com\/(\d+)/);
+    if (vm) return `https://player.vimeo.com/video/${vm[1]}`;
+    if (/\.(mp4|webm)(\?|$)/i.test(url)) return url;
+    return null;
+  }
+
+  function renderMedia(c) {
+    const mediaSec = el("#media");
+    const videosEl = el("#mediaVideos");
+    const galleryEl = el("#mediaGallery");
+    const navMedia = el("#navMedia");
+    const videos = c.media?.videos || [];
+    const gallery = c.media?.gallery || [];
+    const hasMedia = videos.length > 0 || gallery.length > 0;
+
+    if (mediaSec) mediaSec.hidden = !hasMedia;
+    if (navMedia) navMedia.hidden = !hasMedia;
+
+    setText("[data-cms='media.title']", c.media?.title);
+    setText("[data-cms='media.subtitle']", c.media?.subtitle);
+
+    if (videosEl) {
+      videosEl.innerHTML = videos
+        .filter((v) => v.url)
+        .map((v) => {
+          const embed = videoEmbedUrl(v.url);
+          const player = embed
+            ? `<div class="video-wrap"><iframe src="${escapeHtml(embed)}" title="${escapeHtml(v.title || "Video")}" allowfullscreen loading="lazy"></iframe></div>`
+            : `<a href="${escapeHtml(v.url)}" class="video-link" target="_blank" rel="noopener">Watch video →</a>`;
+          return `<article class="media-video-card">
+            <h3>${escapeHtml(v.title || "Video")}</h3>
+            ${player}
+            ${v.caption ? `<p>${escapeHtml(v.caption)}</p>` : ""}
+          </article>`;
+        })
+        .join("");
+    }
+
+    if (galleryEl) {
+      galleryEl.innerHTML = gallery
+        .filter((g) => g.imageUrl)
+        .map(
+          (g) => `<figure class="gallery-card">
+            <img src="${escapeHtml(g.imageUrl)}" alt="${escapeHtml(g.title || "Photo")}" loading="lazy" />
+            ${g.title ? `<figcaption><strong>${escapeHtml(g.title)}</strong>${g.caption ? ` — ${escapeHtml(g.caption)}` : ""}</figcaption>` : g.caption ? `<figcaption>${escapeHtml(g.caption)}</figcaption>` : ""}
+          </figure>`
+        )
+        .join("");
+    }
+  }
+
+  function renderCustomItem(item) {
+    const type = item.type || "text";
+    if (type === "link" && item.url) {
+      return `<a href="${escapeHtml(item.url)}" class="custom-item custom-item--link" target="_blank" rel="noopener">
+        <h3>${escapeHtml(item.title || "Link")}</h3>
+        ${item.body ? `<p>${escapeHtml(item.body)}</p>` : ""}
+        <span class="custom-link-arrow">Open link →</span>
+      </a>`;
+    }
+    if (type === "image" && item.imageUrl) {
+      return `<figure class="custom-item custom-item--image">
+        <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title || "Photo")}" loading="lazy" />
+        ${item.title || item.caption ? `<figcaption><strong>${escapeHtml(item.title || "")}</strong>${item.caption ? ` ${escapeHtml(item.caption)}` : ""}</figcaption>` : ""}
+      </figure>`;
+    }
+    if (type === "video" && item.url) {
+      const embed = videoEmbedUrl(item.url);
+      const player = embed
+        ? `<div class="video-wrap"><iframe src="${escapeHtml(embed)}" title="${escapeHtml(item.title || "Video")}" allowfullscreen loading="lazy"></iframe></div>`
+        : `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Watch video →</a>`;
+      return `<article class="custom-item custom-item--video">
+        <h3>${escapeHtml(item.title || "Video")}</h3>
+        ${player}
+        ${item.caption ? `<p>${escapeHtml(item.caption)}</p>` : ""}
+      </article>`;
+    }
+    return `<article class="custom-item custom-item--text">
+      ${item.title ? `<h3>${escapeHtml(item.title)}</h3>` : ""}
+      ${item.body ? `<p>${escapeHtml(item.body)}</p>` : ""}
+    </article>`;
+  }
+
+  function renderCustomSections(c) {
+    const root = el("#customSectionsRoot");
+    const navLinks = el("#navLinks");
+    const contactLi = navLinks?.querySelector('a[href="#contact"]')?.closest("li");
+
+    navLinks?.querySelectorAll("[data-custom-nav]").forEach((n) => n.remove());
+
+    if (!root) return;
+    const sections = c.customSections || [];
+    root.innerHTML = sections
+      .map((sec) => {
+        const items = (sec.items || []).map(renderCustomItem).join("");
+        return `<section id="section-${escapeHtml(sec.id)}" class="section section-custom">
+          <div class="container">
+            <div class="section-head reveal">
+              <h2>${escapeHtml(sec.title || "Section")}</h2>
+              ${sec.subtitle ? `<p>${escapeHtml(sec.subtitle)}</p>` : ""}
+            </div>
+            <div class="custom-items reveal">${items}</div>
+          </div>
+        </section>`;
+      })
+      .join("");
+
+    sections.forEach((sec) => {
+      if (!sec.showInNav || !contactLi || !navLinks) return;
+      const li = document.createElement("li");
+      li.setAttribute("data-custom-nav", sec.id);
+      li.innerHTML = `<a href="#section-${escapeHtml(sec.id)}" class="nav-link">${escapeHtml(sec.navLabel || sec.title || "Section")}</a>`;
+      navLinks.insertBefore(li, contactLi);
+    });
   }
 
   function applyContent(c) {
@@ -55,9 +201,9 @@
       stats.innerHTML = c.stats
         .map(
           (s, i) => `
-        <div class="stat stat--un-${i + 1}" data-count="${s.count}">
+        <div class="stat stat--un-${(i % 4) + 1}" data-count="${s.count}">
           <span class="stat-num"><span class="counter">0</span>${s.suffix || ""}</span>
-          <span class="stat-label">${s.label}</span>
+          <span class="stat-label">${escapeHtml(s.label)}</span>
         </div>`
         )
         .join("");
@@ -82,9 +228,9 @@
       highlights.innerHTML = c.about.highlights
         .map(
           (h, i) => `
-        <article class="highlight-card ${classes[i] || ""}">
-          <h3>${h.title}</h3>
-          <p>${h.text}</p>
+        <article class="highlight-card ${classes[i % 3] || ""}">
+          <h3>${escapeHtml(h.title)}</h3>
+          <p>${escapeHtml(h.text)}</p>
         </article>`
         )
         .join("");
@@ -109,16 +255,16 @@
         .map((r, i) => {
           const link =
             r.linkUrl && r.linkText
-              ? `<a href="${r.linkUrl}" class="role-link" target="_blank" rel="noopener">${r.linkText}</a>`
+              ? `<a href="${escapeHtml(r.linkUrl)}" class="role-link" target="_blank" rel="noopener">${escapeHtml(r.linkText)}</a>`
               : r.linkUrl
-                ? `<a href="${r.linkUrl}" class="role-link">${r.linkText || r.linkUrl}</a>`
+                ? `<a href="${escapeHtml(r.linkUrl)}" class="role-link">${escapeHtml(r.linkText || r.linkUrl)}</a>`
                 : "";
           return `
-        <article class="role-card ${cardClass[i] || ""}">
+        <article class="role-card ${cardClass[i % 3] || ""}">
           ${logos[i] || ""}
-          <h3>${r.org}</h3>
-          <p class="role-title">${r.title}</p>
-          <p>${r.body}</p>
+          <h3>${escapeHtml(r.org)}</h3>
+          <p class="role-title">${escapeHtml(r.title)}</p>
+          <p>${escapeHtml(r.body)}</p>
           ${link}
         </article>`;
         })
@@ -130,11 +276,11 @@
       pubGrid.innerHTML = c.publications
         .map(
           (p) => `
-        <a href="${p.url}" class="pub-card" target="_blank" rel="noopener">
-          <span class="pub-date">${p.date}</span>
-          <h3>${p.title}</h3>
-          <p>${p.summary}</p>
-          <span class="pub-outlet">${p.outlet}</span>
+        <a href="${escapeHtml(p.url)}" class="pub-card" target="_blank" rel="noopener">
+          <span class="pub-date">${escapeHtml(p.date)}</span>
+          <h3>${escapeHtml(p.title)}</h3>
+          <p>${escapeHtml(p.summary)}</p>
+          <span class="pub-outlet">${escapeHtml(p.outlet)}</span>
         </a>`
         )
         .join("");
@@ -147,16 +293,19 @@
           (t, i) => `
         <div class="tl-item${i === 0 ? " active" : ""}">
           <button class="tl-trigger" aria-expanded="${i === 0 ? "true" : "false"}">
-            <span class="tl-year">${t.year}</span>
-            <span class="tl-title">${t.title}</span>
+            <span class="tl-year">${escapeHtml(t.year)}</span>
+            <span class="tl-title">${escapeHtml(t.title)}</span>
           </button>
           <div class="tl-body"${i === 0 ? "" : " hidden"}>
-            <p>${t.body}</p>
+            <p>${escapeHtml(t.body)}</p>
           </div>
         </div>`
         )
         .join("");
     }
+
+    renderMedia(c);
+    renderCustomSections(c);
 
     setText("[data-cms='contact.title']", c.contact?.title);
     setText("[data-cms='contact.intro']", c.contact?.intro);
@@ -188,7 +337,7 @@
     if (!res.ok) return null;
     const rows = await res.json();
     if (!rows?.[0]?.content) return null;
-    return { ...defaults, ...rows[0].content };
+    return mergeContent(rows[0].content);
   }
 
   async function init() {
@@ -200,7 +349,7 @@
     }
   }
 
-  window.PortfolioCMS = { applyContent, loadFromSupabase, init };
+  window.PortfolioCMS = { applyContent, loadFromSupabase, init, mergeContent };
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
