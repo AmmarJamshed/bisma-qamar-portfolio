@@ -1,0 +1,11 @@
+{
+  "name": "bisma-qamar-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup:supabase": "node scripts/setup-supabase.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  }
+}

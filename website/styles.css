@@ -602,7 +602,6 @@ body {
   text-underline-offset: 3px;
 }
 .role-link:hover { color: var(--un-blue); }
-.role-note { font-size: 0.76rem; color: var(--text-muted); font-style: italic; }
 
 /* UN diplomacy section */
 .section-un {
@@ -780,18 +779,51 @@ body {
 /* Contact */
 .section-contact {
   background: linear-gradient(180deg, var(--un-blue-pale) 0%, var(--un-white) 100%);
-  border-top: 4px solid var(--un-blue);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 2.5rem;
+  align-items: start;
 }
 .contact-info h2 {
   color: var(--un-navy-deep);
   margin-top: 0;
   font-weight: 700;
 }
+.contact-info > p {
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+.contact-email-block {
+  margin-bottom: 1.25rem;
+}
+.contact-email-block > label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--un-grey-700);
+  margin-bottom: 0.4rem;
+}
+.email-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
 .email-row a {
   font-weight: 700;
   color: var(--un-blue-dark);
+  word-break: break-all;
+}
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 .social-link {
+  display: inline-flex;
+  align-items: center;
   padding: 0.5rem 1rem;
   background: var(--un-white);
   border: 2px solid var(--un-grey-200);
@@ -808,32 +840,62 @@ body {
   border-color: var(--un-blue);
 }
 .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   background: var(--un-white);
   padding: 1.75rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   border: 1px solid var(--un-grey-200);
-  border-top: 4px solid var(--un-blue);
 }
 .contact-form h3 {
-  margin-top: 0;
+  margin: 0;
   color: var(--un-navy-deep);
   font-weight: 700;
 }
-.contact-form label {
+.form-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+}
+.form-field--full {
+  grid-column: 1 / -1;
+}
+.form-label {
   font-weight: 600;
+  font-size: 0.88rem;
   color: var(--un-grey-700);
 }
 .contact-form input,
 .contact-form textarea {
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font);
+  font-size: 1rem;
   border: 1px solid var(--un-grey-200);
   border-radius: var(--radius);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--un-blue);
   box-shadow: 0 0 0 3px rgba(0, 158, 219, 0.2);
+}
+.contact-form .btn-block {
+  width: 100%;
+  margin: 0;
 }
 
 /* Footer — UN navy */
@@ -886,4 +948,5 @@ body {
 @media (max-width: 480px) {
   .stats-bar { grid-template-columns: 1fr; }
   .un-tabs { flex-direction: column; }
+  .form-fields { grid-template-columns: 1fr; }
 }

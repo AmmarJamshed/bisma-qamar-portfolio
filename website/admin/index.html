@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Edit portfolio — Bisma Qamar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="loginScreen" class="screen">
+    <div class="login-card">
+      <h1>Portfolio editor</h1>
+      <p class="hint">For Bisma Qamar only. Changes appear on the live site after you save.</p>
+      <form id="loginForm">
+        <label>
+          Username
+          <input type="text" id="loginUser" autocomplete="username" value="bismaqamar" required />
+        </label>
+        <label>
+          Password
+          <input type="password" id="loginPass" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        <p id="loginError" class="error" hidden></p>
+      </form>
+      <p class="back"><a href="../index.html">← View public site</a></p>
+    </div>
+  </div>
+
+  <div id="editorScreen" class="screen" hidden>
+    <header class="editor-header">
+      <div>
+        <strong>Portfolio editor</strong>
+        <span id="saveStatus" class="status"></span>
+      </div>
+      <div class="header-actions">
+        <a href="../index.html" class="btn btn-outline" target="_blank">Preview site</a>
+        <button type="button" id="logoutBtn" class="btn btn-outline">Sign out</button>
+        <button type="button" id="saveBtn" class="btn btn-primary">Save changes</button>
+      </div>
+    </header>
+
+    <main class="editor-main">
+      <nav class="editor-nav" id="editorNav">
+        <button type="button" data-section="hero" class="active">Home & photo</button>
+        <button type="button" data-section="stats">Stats</button>
+        <button type="button" data-section="about">About</button>
+        <button type="button" data-section="empower">Empowerment</button>
+        <button type="button" data-section="roles">Roles</button>
+        <button type="button" data-section="publications">Publications</button>
+        <button type="button" data-section="timeline">Timeline</button>
+        <button type="button" data-section="contact">Contact</button>
+      </nav>
+
+      <form id="editorForm" class="editor-form"></form>
+    </main>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../js/default-content.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

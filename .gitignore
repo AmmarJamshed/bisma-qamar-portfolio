@@ -3,3 +3,8 @@ Thumbs.db
 _book/
 node_modules/
 *.log
+.vercel
+.env
+.env.local
+scripts/_seed.sql
+.vercel

@@ -1,8 +1,10 @@
 # Publish this portfolio
 
-## Interactive website (primary)
+## Interactive website (primary) — **LIVE on Vercel**
 
-The **`website/`** folder is a full single-page portfolio with photo, UN-themed design, tabs, timeline, and contact form.
+**Public URL:** https://bisma-qamar-portfolio.vercel.app
+
+The **`website/`** folder is a full single-page portfolio with photo, UN-themed design, tabs, timeline, and contact form. Deployed via Vercel (`vercel.json` → `outputDirectory: website`). GitHub repo is linked for automatic redeploys on push to `main`.
 
 **Preview locally:**
 ```bash

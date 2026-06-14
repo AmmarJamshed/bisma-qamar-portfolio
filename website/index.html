@@ -23,7 +23,7 @@
     <nav class="nav container">
       <a href="#home" class="logo">
         <span class="logo-globe" aria-hidden="true"></span>
-        <span class="logo-text">Bisma Qamar</span>
+        <span class="logo-text" data-cms="hero.name">Bisma Qamar</span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -47,12 +47,12 @@
       <div class="container hero-grid">
         <div class="hero-content reveal">
           <p class="eyebrow">
-            <span class="badge badge-un-primary">Woman empowerment specialist</span>
-            <span class="badge badge-un-outline">United Nations · PMYP · PSTD</span>
+            <span class="badge badge-un-primary" data-cms="hero.badgePrimary">Woman empowerment specialist</span>
+            <span class="badge badge-un-outline" data-cms="hero.badgeOutline">United Nations · PMYP · PSTD</span>
           </p>
-          <h1 class="hero-title">Bisma Qamar</h1>
-          <p class="hero-tagline">Elevating women & youth through voice, equity, and global leadership</p>
-          <p class="hero-lead">
+          <h1 class="hero-title" data-cms="hero.name">Bisma Qamar</h1>
+          <p class="hero-tagline" data-cms="hero.tagline">Elevating women & youth through voice, equity, and global leadership</p>
+          <p class="hero-lead" data-cms="hero.lead">
             I help women and young people show up with <strong>confidence and clarity</strong>—through DE&I conferences,
             personal branding, and policy platforms from <strong>PSTD</strong> to the <strong>United Nations</strong>,
             as PMYP Focal Person for Global Youth Affairs.
@@ -60,22 +60,22 @@
           <div class="hero-actions">
             <a href="#empowerment" class="btn btn-primary">Empowerment work</a>
             <a href="#contact" class="btn btn-secondary">Collaborate</a>
-            <a href="https://www.linkedin.com/in/bismaqamar" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/bismaqamar" target="_blank" rel="noopener" class="btn btn-outline" data-cms="hero.linkedin">LinkedIn</a>
           </div>
         </div>
         <div class="hero-visual reveal">
           <div class="photo-frame">
-            <img src="assets/bisma-qamar.jpg" alt="Bisma Qamar — professional portrait" width="320" height="320" class="hero-photo" />
+            <img src="assets/bisma-qamar.jpg" alt="Bisma Qamar — professional portrait" width="320" height="320" class="hero-photo" data-cms="hero.photo" />
             <div class="photo-ring"></div>
           </div>
           <div class="hero-card floating-card floating-card--un">
-            <span class="hero-card-label">Empowerment in action</span>
-            <strong>WIBCON & DE&I 2024</strong>
-            <span>2,500+ leaders · 300+ organizations</span>
+            <span class="hero-card-label" data-cms="hero.floatingLabel">Empowerment in action</span>
+            <strong data-cms="hero.floatingTitle">WIBCON & DE&I 2024</strong>
+            <span data-cms="hero.floatingSub">2,500+ leaders · 300+ organizations</span>
           </div>
         </div>
       </div>
-      <div class="stats-bar container reveal">
+      <div class="stats-bar container reveal" id="statsBar">
         <div class="stat stat--un-1" data-count="2500">
           <span class="stat-num"><span class="counter">0</span>+</span>
           <span class="stat-label">Leaders empowered at conferences</span>
@@ -100,28 +100,28 @@
       <div class="container">
         <div class="section-head reveal">
           <h2>About</h2>
-          <p>A woman empowerment specialist who turns visibility into voice—and voice into opportunity.</p>
+          <p data-cms="about.subtitle">A woman empowerment specialist who turns visibility into voice—and voice into opportunity.</p>
         </div>
         <div class="about-grid reveal">
           <div class="about-text">
-            <p>
-              Bisma Qamar is a Pakistani <strong>woman empowerment specialist</strong>, communications leader, and youth diplomat
-              with an <strong>MBA from IoBM (2022–2024)</strong>. She designs spaces where women and young people are heard—not sidelined—
-              from Pakistan’s largest <strong>DE&I conferences</strong> to the <strong>United Nations</strong>.
+            <p data-cms="about.p1">
+              Bisma Qamar is a Pakistani woman empowerment specialist, communications leader, and youth diplomat
+              with an MBA from IoBM (2022–2024). She designs spaces where women and young people are heard—not sidelined—
+              from Pakistan’s largest DE&I conferences to the United Nations.
             </p>
-            <p>
-              Her work spans <strong>gender-inclusive education</strong>, authentic <strong>personal branding</strong> (University of Karachi MediaVerse, Nov 2024),
-              workplace equity writing, and PMYP–UN engagement—including <strong>ECOSOC Youth Forum 2026</strong> and interviews with
-              <strong>Ambassador Munir Akram</strong> and <strong>Dr. Felipe Paullier</strong> (UN ASG for Youth).
+            <p data-cms="about.p2">
+              Her work spans gender-inclusive education, authentic personal branding (University of Karachi MediaVerse, Nov 2024),
+              workplace equity writing, and PMYP–UN engagement—including ECOSOC Youth Forum 2026 and interviews with
+              Ambassador Munir Akram and Dr. Felipe Paullier (UN ASG for Youth).
             </p>
             <ul class="about-facts">
-              <li><strong>Base:</strong> Karachi, Pakistan</li>
-              <li><strong>Education:</strong> MBA, Institute of Business Management</li>
-              <li><strong>Languages:</strong> English (native/bilingual), Urdu (full professional)</li>
-              <li><strong>Email:</strong> <a href="mailto:bisma.qamar@pstd.com.pk">bisma.qamar@pstd.com.pk</a></li>
+              <li><strong>Base:</strong> <span data-cms="about.base">Karachi, Pakistan</span></li>
+              <li><strong>Education:</strong> <span data-cms="about.education">MBA, Institute of Business Management</span></li>
+              <li><strong>Languages:</strong> <span data-cms="about.languages">English (native/bilingual), Urdu (full professional)</span></li>
+              <li><strong>Email:</strong> <a href="mailto:bisma.qamar@pstd.com.pk" data-cms="about.email">bisma.qamar@pstd.com.pk</a></li>
             </ul>
           </div>
-          <div class="about-highlights">
+          <div class="about-highlights" id="aboutHighlights">
             <article class="highlight-card h-card--un-a">
               <h3>Women’s voice at the UN</h3>
               <p>Youth representative, New York (2024). Advocating meaningful participation for young women globally.</p>
@@ -144,9 +144,9 @@
       <div class="container">
         <div class="un-brand-bar reveal" aria-hidden="true"></div>
         <div class="section-head section-head--light reveal">
-          <p class="section-kicker">Women empowerment · Gender-inclusive leadership</p>
-          <h2>Empowerment & inclusion</h2>
-          <p>Aligned with UN principles on youth participation and equal opportunity—delivered through training, DE&I, and global platforms.</p>
+          <p class="section-kicker" data-cms="empower.kicker">Women empowerment · Gender-inclusive leadership</p>
+          <h2 data-cms="empower.title">Empowerment & inclusion</h2>
+          <p data-cms="empower.intro">Aligned with UN principles on youth participation and equal opportunity—delivered through training, DE&I, and global platforms.</p>
         </div>
         <div class="pillar-grid reveal">
           <article class="pillar pillar-1">
@@ -181,8 +181,8 @@
           </article>
         </div>
         <p class="empower-quote reveal">
-          “Her presence reminded us of the power of mentorship, storytelling, and standing out with purpose.”
-          <cite>— MediaVerse, University of Karachi (2024)</cite>
+          <span data-cms="empower.quote">“Her presence reminded us of the power of mentorship, storytelling, and standing out with purpose.”</span>
+          <cite data-cms="empower.quoteCite">— MediaVerse, University of Karachi (2024)</cite>
         </p>
       </div>
     </section>
@@ -204,7 +204,7 @@
             </a>
           </div>
         </div>
-        <div class="role-cards reveal">
+        <div class="role-cards reveal" id="roleCards">
           <article class="role-card role-card--pmyp">
             <img src="assets/logos/pmyp.png" alt="" class="role-card-logo role-card-logo--pmyp" width="180" height="48" />
             <h3>Prime Minister’s Youth Programme</h3>
@@ -224,7 +224,6 @@
             <h3>United Nations pathway</h3>
             <p class="role-title">Youth Representative — National Youth Council</p>
             <p><em>Jun – Oct 2024</em> · New York. IYC representative during the Pact for the Future / Summit of the Future.</p>
-            <span class="role-note">Youth delegate — not UN Secretariat staff</span>
           </article>
         </div>
       </div>
@@ -348,7 +347,7 @@
           <h2>Publications & media</h2>
           <p>IPS · IDN-InDepthNews</p>
         </div>
-        <div class="pub-grid reveal">
+        <div class="pub-grid reveal" id="pubGrid">
           <a href="https://www.ipsnews.net/2026/05/a-new-youth-generation-largest-in-history-a-decisive-force/" class="pub-card" target="_blank" rel="noopener">
             <span class="pub-date">28 May 2026</span>
             <h3>A New Youth Generation: Largest in History & a Decisive Force</h3>
@@ -385,8 +384,8 @@
       <div class="container">
         <div class="contact-grid reveal">
           <div class="contact-info">
-            <h2>Let’s connect</h2>
-            <p>Women’s leadership workshops, DE&I partnerships, media, or UN–youth collaborations.</p>
+            <h2 data-cms="contact.title">Let’s connect</h2>
+            <p data-cms="contact.intro">Women’s leadership workshops, DE&I partnerships, media, or UN–youth collaborations.</p>
             <div class="contact-email-block">
               <label>Email</label>
               <div class="email-row">
@@ -395,24 +394,26 @@
               </div>
             </div>
             <div class="contact-links">
-              <a href="https://www.linkedin.com/in/bismaqamar" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
-              <a href="https://www.ipsnews.net/author/bisma-qamar/" target="_blank" rel="noopener" class="social-link">IPS Author</a>
+              <a href="https://www.linkedin.com/in/bismaqamar" target="_blank" rel="noopener" class="social-link" data-cms="contact.linkedin">LinkedIn</a>
+              <a href="https://www.ipsnews.net/author/bisma-qamar/" target="_blank" rel="noopener" class="social-link" data-cms="contact.ips">IPS Author</a>
             </div>
           </div>
           <form class="contact-form" onsubmit="return false;" aria-label="Quick message (opens email)">
             <h3>Send a message</h3>
-            <label>
-              Your name
-              <input type="text" id="formName" placeholder="Your name" />
-            </label>
-            <label>
-              Subject
-              <input type="text" id="formSubject" placeholder="Speaking / Media / Partnership" />
-            </label>
-            <label>
-              Message
-              <textarea id="formMessage" rows="4" placeholder="Brief introduction…"></textarea>
-            </label>
+            <div class="form-fields">
+              <label class="form-field">
+                <span class="form-label">Your name</span>
+                <input type="text" id="formName" name="name" autocomplete="name" placeholder="Your name" />
+              </label>
+              <label class="form-field">
+                <span class="form-label">Subject</span>
+                <input type="text" id="formSubject" name="subject" placeholder="Speaking / Media / Partnership" />
+              </label>
+              <label class="form-field form-field--full">
+                <span class="form-label">Message</span>
+                <textarea id="formMessage" name="message" rows="5" placeholder="Brief introduction…"></textarea>
+              </label>
+            </div>
             <button type="button" class="btn btn-primary btn-block" id="sendEmail">Open in email app</button>
           </form>
         </div>
@@ -428,6 +429,9 @@
     </div>
   </footer>
 
+  <script src="config.js"></script>
+  <script src="js/default-content.js"></script>
+  <script src="js/cms.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
